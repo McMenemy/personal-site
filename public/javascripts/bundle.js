@@ -24366,7 +24366,7 @@
 	
 	
 	  componentDidMount: function () {
-	    // this.startCanvas();
+	    this.startCanvas();
 	  },
 	
 	  startCanvas: function () {
@@ -29817,16 +29817,15 @@
 	    boxShadow: '0',
 	    borderRadius: 0,
 	    margin: '10vh 10vw 10vh 10vw',
-	    border: 'solid 1px black',
 	    textAlign: 'center'
 	  },
 	
-	  projectCard: {
+	  projectPaper: {
 	    width: '32%',
 	    height: '25.6vw',
 	    display: 'inline-block',
-	    border: 'solid 1px black',
-	    marginTop: '20%'
+	    marginTop: '20%',
+	    backgroundSize: 'cover'
 	  }
 	
 	};
@@ -29956,9 +29955,30 @@
 	          React.createElement(
 	            Menu,
 	            null,
-	            React.createElement(MenuItem, { primaryText: 'Resume.pdf' }),
-	            React.createElement(MenuItem, { primaryText: 'LinkedIn' }),
-	            React.createElement(MenuItem, { primaryText: 'GitHub' })
+	            React.createElement(
+	              'a',
+	              {
+	                target: '_blank',
+	                href: './images/resume.pdf'
+	              },
+	              React.createElement(MenuItem, { primaryText: 'Resume.pdf' })
+	            ),
+	            React.createElement(
+	              'a',
+	              {
+	                target: '_blank',
+	                href: 'https://www.linkedin.com/in/josh-mcmenemy-301b4339'
+	              },
+	              React.createElement(MenuItem, { primaryText: 'LinkedIn' })
+	            ),
+	            React.createElement(
+	              'a',
+	              {
+	                target: '_blank',
+	                href: 'https://github.com/McMenemy'
+	              },
+	              React.createElement(MenuItem, { primaryText: 'GitHub' })
+	            )
 	          )
 	        )
 	      ),
@@ -33148,13 +33168,26 @@
 	  displayName: 'Projects',
 	
 	
+	  getProjectStyle: function (styleObj, imagePath) {
+	    var cloneObj = JSON.parse(JSON.stringify(styleObj));
+	    cloneObj.backgroundImage = 'url("' + imagePath + '")';
+	    return cloneObj;
+	  },
+	
 	  render: function () {
 	    return React.createElement(
 	      Paper,
 	      { zIndex: 0, style: Style.projectDiv },
-	      React.createElement(Card, { style: Style.projectCard }),
-	      React.createElement(Card, { className: 'centerCard', style: Style.projectCard }),
-	      React.createElement(Card, { style: Style.projectCard })
+	      React.createElement(Paper, {
+	        style: this.getProjectStyle(Style.projectPaper, './images/optimyze.png')
+	      }),
+	      React.createElement(Paper, {
+	        className: 'centerPaper',
+	        style: this.getProjectStyle(Style.projectPaper, './images/microMunchZoom.png')
+	      }),
+	      React.createElement(Paper, {
+	        style: this.getProjectStyle(Style.projectPaper, './images/chess.png')
+	      })
 	    );
 	  }
 	

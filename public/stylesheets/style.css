@@ -5,7 +5,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
 }
 
 #constellation-canvas {
@@ -15,7 +15,7 @@ a {
   opacity: 0.5 !important;
 }
 
-.centerCard {
+.centerPaper {
   margin-left: 2%;
   margin-right: 2%;
 }

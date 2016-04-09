@@ -32,16 +32,15 @@ module.exports = {
     boxShadow: '0',
     borderRadius: 0,
     margin: '10vh 10vw 10vh 10vw',
-    border: 'solid 1px black',
     textAlign: 'center',
   },
 
-  projectCard: {
+  projectPaper: {
     width: '32%',
     height: '25.6vw',
     display: 'inline-block',
-    border: 'solid 1px black',
     marginTop: '20%',
+    backgroundSize: 'cover',
   },
 
 };

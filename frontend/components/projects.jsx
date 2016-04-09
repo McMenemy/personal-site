@@ -13,12 +13,31 @@ var CardText = require('material-ui/lib/card/card-text');
 
 var Projects = React.createClass({
 
+  getProjectStyle: function (styleObj, imagePath) {
+    var cloneObj = JSON.parse(JSON.stringify(styleObj));
+    cloneObj.backgroundImage = 'url("' + imagePath + '")';
+    return cloneObj;
+  },
+
   render: function () {
     return (
       <Paper zIndex={0} style={Style.projectDiv} >
-        <Card style={Style.projectCard}/>
-        <Card className="centerCard" style={Style.projectCard}/>
-        <Card style={Style.projectCard}/>
+        <Paper
+          style={
+            this.getProjectStyle(Style.projectPaper, './images/optimyze.png')
+          }
+        />
+        <Paper
+          className='centerPaper'
+          style={
+            this.getProjectStyle(Style.projectPaper, './images/microMunchZoom.png')
+          }
+        />
+        <Paper
+          style={
+            this.getProjectStyle(Style.projectPaper, './images/chess.png')
+          }
+        />
       </Paper>
     );
   },

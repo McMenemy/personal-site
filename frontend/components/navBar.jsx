@@ -103,13 +103,27 @@ var NavBar = React.createClass({
             onRequestClose={this.closeResume}
           >
             <Menu>
-              <MenuItem primaryText='Resume.pdf' />
-              <MenuItem primaryText='LinkedIn' />
-              <MenuItem primaryText='GitHub' />
+              <a
+                target="_blank"
+                href="./images/resume.pdf"
+              >
+                <MenuItem primaryText='Resume.pdf' />
+              </a>
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/josh-mcmenemy-301b4339"
+              >
+                <MenuItem primaryText='LinkedIn' />
+              </a>
+              <a
+                target="_blank"
+                href="https://github.com/McMenemy"
+              >
+                <MenuItem primaryText='GitHub' />
+              </a>
             </Menu>
           </Popover>
         </ToolbarGroup>
-
         <ToolbarGroup float={'right'}>
           <ToolbarTitle
             className='navBarTitle'
