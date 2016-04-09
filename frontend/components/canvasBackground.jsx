@@ -6,7 +6,7 @@ var Star = require('../util/canvas/star');
 var CanvasBackground = React.createClass({
 
   componentDidMount: function () {
-    this.startCanvas();
+    // this.startCanvas();
   },
 
   startCanvas: function () {

@@ -9,9 +9,13 @@ a {
 }
 
 #constellation-canvas {
-  background-color: #000000;
 }
 
 .navBarTitle:hover {
   opacity: 0.5 !important;
+}
+
+.centerCard {
+  margin-left: 2%;
+  margin-right: 2%;
 }

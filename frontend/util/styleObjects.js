@@ -26,11 +26,22 @@ module.exports = {
 
   projectDiv: {
     width: '80vw',
-    height: '500px',
+    height: '80vh',
+    display: 'inline-block',
+    backgroundColor: 'none',
     boxShadow: '0',
-    backgroundColor: 'black',
     borderRadius: 0,
-    margin: '0 auto',
+    margin: '10vh 10vw 10vh 10vw',
+    border: 'solid 1px black',
+    textAlign: 'center',
+  },
+
+  projectCard: {
+    width: '32%',
+    height: '25.6vw',
+    display: 'inline-block',
+    border: 'solid 1px black',
+    marginTop: '20%',
   },
 
 };
