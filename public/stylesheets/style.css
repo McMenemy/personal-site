@@ -9,6 +9,8 @@ a {
 }
 
 #constellation-canvas {
+  width: 600px;
+  height: 600px;
 }
 
 .navBarTitle:hover {

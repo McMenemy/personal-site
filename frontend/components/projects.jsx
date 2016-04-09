@@ -22,23 +22,38 @@ var Projects = React.createClass({
   render: function () {
     return (
       <Paper zIndex={0} style={Style.projectDiv} >
+        <a
+          target="_blank"
+          href="http://www.optimyze.xyz/"
+        >
         <Paper
           style={
             this.getProjectStyle(Style.projectPaper, './images/optimyze.png')
           }
         />
+      </a>
+      <a
+        target="_blank"
+        href="https://microorganism-munch.herokuapp.com/"
+      >
         <Paper
           className='centerPaper'
           style={
             this.getProjectStyle(Style.projectPaper, './images/microMunchZoom.png')
           }
         />
+      </a>
+      <a
+        target="_blank"
+        href="https://github.com/McMenemy/terminal-chess-game"
+      >
         <Paper
           style={
             this.getProjectStyle(Style.projectPaper, './images/chess.png')
           }
         />
-      </Paper>
+      </a>
+    </Paper>
     );
   },
 

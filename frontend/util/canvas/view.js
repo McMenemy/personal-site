@@ -39,7 +39,7 @@ module.exports = function () {
 
   View.prototype.addConstellations = function () {
     var constellations = [];
-    var stars = [new Universe.Star({
+    var testStars = [new Universe.Star({
       constellationRef: 0,
       pos: [200, 200],
       connections: [1],
@@ -56,8 +56,33 @@ module.exports = function () {
       radius: STAR_RADIUS,
     }),
     ];
-    var testConstellation = new Universe.Constellation(stars);
+    var testConstellation = new Universe.Constellation(testStars);
     constellations.push(testConstellation);
+
+    var testStars2 = [new Universe.Star({
+      constellationRef: 1,
+      pos: [450, 175],
+      connections: [1],
+      radius: STAR_RADIUS,
+    }), new Universe.Star({
+      constellationRef: 1,
+      pos: [425, 195],
+      connections: [],
+      radius: STAR_RADIUS,
+    }), new Universe.Star({
+      constellationRef: 1,
+      pos: [490, 160],
+      connections: [0],
+      radius: STAR_RADIUS,
+    }), new Universe.Star({
+      constellationRef: 1,
+      pos: [485, 125],
+      connections: [1, 2],
+      radius: STAR_RADIUS,
+    }),
+    ];
+    var testConstellation2 = new Universe.Constellation(testStars2);
+    constellations.push(testConstellation2);
 
     return constellations;
   };
@@ -67,7 +92,7 @@ module.exports = function () {
   };
 
   View.prototype.animate = function () {
-    console.log('animating');
+    console.log('animating', this.constellations);
     this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
     for (var i = 0; i < this.constellations.length; i++) {
       this.constellations[i].draw(this.ctx);
