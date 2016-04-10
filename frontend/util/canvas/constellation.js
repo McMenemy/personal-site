@@ -4,7 +4,8 @@ module.exports = function () {
     window.Universe = {};
   }
 
-  var Constellation = Universe.Constellation = function (stars) {
+  var Constellation = Universe.Constellation = function (stars, quote) {
+    this.quote = quote;
     this.stars = stars;
   };
 

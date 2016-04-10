@@ -5,8 +5,22 @@ var Star = require('../util/canvas/star');
 
 var CanvasBackground = React.createClass({
 
+  getInitialState: function () {
+    return { windowWidth: window.innerWidth, windowHeight: window.innerHeight };
+  },
+
+  handleResize: function (e) {
+    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
+    this.startCanvas();
+  },
+
   componentDidMount: function () {
     this.startCanvas();
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this.handleResize);
   },
 
   startCanvas: function () {
@@ -14,13 +28,12 @@ var CanvasBackground = React.createClass({
     Constellation();
     Star();
     CanvasView();
-    new Universe.View(canvas).start();
+    new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight).start();
   },
 
   render: function () {
     return (
-      <canvas id="constellation-canvas">
-      </canvas>
+      <canvas id="constellation-canvas" />
     );
   },
 
