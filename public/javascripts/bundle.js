@@ -36856,12 +36856,15 @@
 	
 	
 	  getInitialState: function () {
-	    return { windowWidth: window.innerWidth, windowHeight: window.innerHeight };
+	    return {
+	      windowWidth: window.innerWidth, windowHeight: window.innerHeight,
+	      universe: null
+	    };
 	  },
 	
 	  handleResize: function (e) {
 	    this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
-	    this.startCanvas();
+	    this.newCanvas();
 	  },
 	
 	  componentDidMount: function () {
@@ -36878,7 +36881,21 @@
 	    Constellation();
 	    Star();
 	    CanvasView();
-	    new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight).start();
+	    var view = new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight);
+	    view.start(); // initialize new canvas
+	    this.setState({
+	      universe: view
+	    });
+	  },
+	
+	  newCanvas: function () {
+	    var canvas = document.getElementById('constellation-canvas');
+	    this.state.universe.end(); // removes listner from previous universe
+	    var view = new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight);
+	    view.start(); // initialize new canvas
+	    this.setState({
+	      universe: view
+	    });
 	  },
 	
 	  render: function () {
@@ -36912,13 +36929,12 @@
 	    var ctx = canvas.getContext('2d');
 	    this.ctx = ctx;
 	    this.constellations = this.addConstellations();
-	    this.addConstellationListener(canvas);
+	    this.addConstellationListener();
 	  };
 	
-	  View.prototype.addConstellationListener = function (canvas) {
-	    var _this = this;
-	    canvas.addEventListener('mousemove', function (e) {
-	      var mousePos = _this.getMousePos(canvas, e);
+	  View.prototype.addConstellationListener = function (e) {
+	    this.callBack = function (e) {
+	      var mousePos = this.getMousePos(this.canvas, e);
 	
 	      // loops through every star, could add a break once a star is found
 	      for (var i = 0; i < _this.constellations.length; i++) {
@@ -36934,12 +36950,20 @@
 	          }
 	        }
 	      }
-	    });
+	    };
+	
+	    var _this = this;
+	    this.canvas.addEventListener('mousemove', this.callBack.bind(_this));
 	  };
 	
 	  View.prototype.start = function () {
 	    // written as bind incase I want to use animate recusively later
 	    requestAnimationFrame(this.animate.bind(this));
+	  };
+	
+	  View.prototype.end = function () {
+	    this.constellations = []; // removes ghost constellations kinda hacky
+	    this.canvas.removeEventListener('mousemove', this.callBack);
 	  };
 	
 	  View.prototype.animate = function (selectedConstellation) {

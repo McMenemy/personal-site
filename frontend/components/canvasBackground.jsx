@@ -6,12 +6,15 @@ var Star = require('../util/canvas/star');
 var CanvasBackground = React.createClass({
 
   getInitialState: function () {
-    return { windowWidth: window.innerWidth, windowHeight: window.innerHeight };
+    return {
+      windowWidth: window.innerWidth, windowHeight: window.innerHeight,
+      universe: null,
+    };
   },
 
   handleResize: function (e) {
     this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
-    this.startCanvas();
+    this.newCanvas();
   },
 
   componentDidMount: function () {
@@ -28,7 +31,21 @@ var CanvasBackground = React.createClass({
     Constellation();
     Star();
     CanvasView();
-    new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight).start();
+    var view = new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight);
+    view.start(); // initialize new canvas
+    this.setState({
+      universe: view,
+    });
+  },
+
+  newCanvas: function () {
+    var canvas = document.getElementById('constellation-canvas');
+    this.state.universe.end(); // removes listner from previous universe
+    var view = new Universe.View(canvas, this.state.windowWidth, this.state.windowHeight);
+    view.start(); // initialize new canvas
+    this.setState({
+      universe: view,
+    });
   },
 
   render: function () {

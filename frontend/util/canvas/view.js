@@ -17,13 +17,12 @@ module.exports = function () {
     var ctx = canvas.getContext('2d');
     this.ctx = ctx;
     this.constellations = this.addConstellations();
-    this.addConstellationListener(canvas);
+    this.addConstellationListener();
   };
 
-  View.prototype.addConstellationListener = function (canvas) {
-    var _this = this;
-    canvas.addEventListener('mousemove', function (e) {
-      var mousePos = _this.getMousePos(canvas, e);
+  View.prototype.addConstellationListener = function (e) {
+    this.callBack = function (e) {
+      var mousePos = this.getMousePos(this.canvas, e);
 
       // loops through every star, could add a break once a star is found
       for (var i = 0; i < _this.constellations.length; i++) {
@@ -40,12 +39,20 @@ module.exports = function () {
         }
       }
 
-    });
+    };
+
+    var _this = this;
+    this.canvas.addEventListener('mousemove', this.callBack.bind(_this));
   };
 
   View.prototype.start = function () {
     // written as bind incase I want to use animate recusively later
     requestAnimationFrame(this.animate.bind(this));
+  };
+
+  View.prototype.end = function () {
+    this.constellations = []; // removes ghost constellations kinda hacky
+    this.canvas.removeEventListener('mousemove', this.callBack);
   };
 
   View.prototype.animate = function (selectedConstellation) {
