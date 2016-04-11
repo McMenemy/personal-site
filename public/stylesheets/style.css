@@ -17,7 +17,17 @@ a {
   opacity: 0.5 !important;
 }
 
-.centerPaper {
-  margin-left: 2%;
-  margin-right: 2%;
+.centerCard {
+  left: 34%;
+  top: 10%;
+}
+
+.leftCard {
+  left: 0;
+  top: 10%
+}
+
+.rightCard {
+  right: 0;
+  top: 10%;
 }

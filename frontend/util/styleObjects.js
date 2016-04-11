@@ -28,6 +28,7 @@ module.exports = {
     width: '80vw',
     height: '80vh',
     display: 'inline-block',
+    position: 'relative',
     backgroundColor: 'none',
     boxShadow: '0',
     borderRadius: 0,
@@ -35,11 +36,16 @@ module.exports = {
     textAlign: 'center',
   },
 
-  projectPaper: {
+  projectCard: {
     width: '32%',
+    display: 'inline-block',
+    position: 'absolute',
+  },
+
+  projectMedia: {
+    width: '100%',
     height: '25.6vw',
     display: 'inline-block',
-    marginTop: '20%',
     backgroundSize: 'cover',
   },
 

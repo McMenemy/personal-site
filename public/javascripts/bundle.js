@@ -29628,6 +29628,7 @@
 	    width: '80vw',
 	    height: '80vh',
 	    display: 'inline-block',
+	    position: 'relative',
 	    backgroundColor: 'none',
 	    boxShadow: '0',
 	    borderRadius: 0,
@@ -29635,11 +29636,16 @@
 	    textAlign: 'center'
 	  },
 	
-	  projectPaper: {
+	  projectCard: {
 	    width: '32%',
+	    display: 'inline-block',
+	    position: 'absolute'
+	  },
+	
+	  projectMedia: {
+	    width: '100%',
 	    height: '25.6vw',
 	    display: 'inline-block',
-	    marginTop: '20%',
 	    backgroundSize: 'cover'
 	  }
 	
@@ -37026,14 +37032,17 @@
 	  };
 	
 	  View.prototype.addConstellations = function () {
+	    var unit = this.starRadius * 6; // unit equal to 3 star diameters
 	    var constellations = [];
 	
 	    var testQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten" - Neil Gaiman';
+	    var anchorX = this.width / 3;
+	    var anchorY = this.height * 1 / 5;
 	    var testStars = [new Universe.Star({
 	      constellationRef: 0,
-	      pos: [200, 200],
+	      pos: [anchorX, anchorY],
 	      connections: [1],
-	      radius: this.starRadius
+	      radius: this.starRadius * 3
 	    }), new Universe.Star({
 	      constellationRef: 0,
 	      pos: [275, 300],
@@ -37145,6 +37154,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var injectTapEventPlugin = __webpack_require__(338);
 	
 	// style
 	var Paper = __webpack_require__(209);
@@ -37156,10 +37166,16 @@
 	var CardTitle = __webpack_require__(329);
 	var FlatButton = __webpack_require__(330);
 	var CardText = __webpack_require__(332);
+	var Toggle = __webpack_require__(333);
 	
 	var Projects = React.createClass({
 	  displayName: 'Projects',
 	
+	
+	  getInitialState: function () {
+	    injectTapEventPlugin();
+	    return { expanded: true };
+	  },
 	
 	  getProjectStyle: function (styleObj, imagePath) {
 	    var cloneObj = JSON.parse(JSON.stringify(styleObj));
@@ -37172,35 +37188,115 @@
 	      Paper,
 	      { zIndex: 0, style: Style.projectDiv },
 	      React.createElement(
-	        'a',
-	        {
-	          target: '_blank',
-	          href: 'http://www.optimyze.xyz/'
-	        },
-	        React.createElement(Paper, {
-	          style: this.getProjectStyle(Style.projectPaper, './images/optimyze.png')
-	        })
+	        Card,
+	        { expanded: this.state.expanded, style: Style.projectCard, className: 'leftCard' },
+	        React.createElement(CardHeader, {
+	          title: 'Optimyze',
+	          subtitle: 'full stack web app',
+	          actAsExpander: true,
+	          showExpandableButton: true
+	        }),
+	        React.createElement(
+	          'a',
+	          { target: '_blank', href: 'http://www.optimyze.xyz/#/?_k=tpo8ju' },
+	          React.createElement(CardMedia, {
+	            style: this.getProjectStyle(Style.projectMedia, './images/optimyze.png')
+	          })
+	        ),
+	        React.createElement(
+	          CardText,
+	          { expandable: true },
+	          React.createElement(
+	            'p',
+	            null,
+	            'Uses charts and a category system to allow users to find, visualize, and post quicker ways to do repetitive tasks'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'Built as a single­page asynchronous app using Ruby on Rails and React with a SQL database'
+	          )
+	        ),
+	        React.createElement(
+	          CardActions,
+	          null,
+	          React.createElement(FlatButton, { label: 'Live', onTouchTap: this.handleExpand }),
+	          React.createElement(FlatButton, { label: 'GitHub', onTouchTap: this.handleReduce })
+	        )
 	      ),
 	      React.createElement(
-	        'a',
-	        {
-	          target: '_blank',
-	          href: 'https://microorganism-munch.herokuapp.com/'
-	        },
-	        React.createElement(Paper, {
-	          className: 'centerPaper',
-	          style: this.getProjectStyle(Style.projectPaper, './images/microMunchZoom.png')
-	        })
+	        Card,
+	        { expanded: this.state.expanded, style: Style.projectCard, className: 'centerCard' },
+	        React.createElement(CardHeader, {
+	          title: 'Microoganism Munch',
+	          subtitle: 'javascript web app game',
+	          actAsExpander: true,
+	          showExpandableButton: true
+	        }),
+	        React.createElement(
+	          'a',
+	          { target: '_blank', href: 'https://microorganism-munch.herokuapp.com' },
+	          React.createElement(CardMedia, {
+	            style: this.getProjectStyle(Style.projectMedia, './images/microMunchZoom.png')
+	          })
+	        ),
+	        React.createElement(
+	          CardText,
+	          { expandable: true },
+	          React.createElement(
+	            'p',
+	            null,
+	            'A web app game that includes predator and prey AI written in pure JavaScript using basic vector math'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'Prey AI allows schooling movement pattern and warning of predators'
+	          )
+	        ),
+	        React.createElement(
+	          CardActions,
+	          null,
+	          React.createElement(FlatButton, { label: 'Live', onTouchTap: this.handleExpand }),
+	          React.createElement(FlatButton, { label: 'GitHub', onTouchTap: this.handleReduce })
+	        )
 	      ),
 	      React.createElement(
-	        'a',
-	        {
-	          target: '_blank',
-	          href: 'https://github.com/McMenemy/terminal-chess-game'
-	        },
-	        React.createElement(Paper, {
-	          style: this.getProjectStyle(Style.projectPaper, './images/chess.png')
-	        })
+	        Card,
+	        { expanded: this.state.expanded, style: Style.projectCard, className: 'rightCard' },
+	        React.createElement(CardHeader, {
+	          title: 'Terminal Chess',
+	          subtitle: 'ruby terminal chess game',
+	          actAsExpander: true,
+	          showExpandableButton: true
+	        }),
+	        React.createElement(
+	          'a',
+	          { target: '_blank', href: 'https://github.com/McMenemy/terminal-chess-game' },
+	          React.createElement(CardMedia, {
+	            style: this.getProjectStyle(Style.projectMedia, './images/chess.png')
+	          })
+	        ),
+	        React.createElement(
+	          CardText,
+	          { expandable: true },
+	          React.createElement(
+	            'p',
+	            null,
+	            'Two player terminal chess game written in ruby that enforces game rules'
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'Utilizes object oriented programing and class inheritance to keep game logic DRY and maintainable'
+	          )
+	        ),
+	        React.createElement(
+	          CardActions,
+	          null,
+	          React.createElement(FlatButton, { label: 'Live', onTouchTap: this.handleExpand }),
+	          React.createElement(FlatButton, { label: 'GitHub', onTouchTap: this.handleReduce })
+	        )
 	      )
 	    );
 	  }
@@ -39153,6 +39249,1290 @@
 	
 	exports.default = CardText;
 	module.exports = exports['default'];
+
+/***/ },
+/* 333 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _stylePropable = __webpack_require__(213);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _transitions = __webpack_require__(237);
+	
+	var _transitions2 = _interopRequireDefault(_transitions);
+	
+	var _paper = __webpack_require__(209);
+	
+	var _paper2 = _interopRequireDefault(_paper);
+	
+	var _enhancedSwitch = __webpack_require__(334);
+	
+	var _enhancedSwitch2 = _interopRequireDefault(_enhancedSwitch);
+	
+	var _getMuiTheme = __webpack_require__(238);
+	
+	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var Toggle = _react2.default.createClass({
+	  displayName: 'Toggle',
+	
+	  propTypes: {
+	    /**
+	     * Determines whether the Toggle is initially turned on.
+	     */
+	    defaultToggled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Will disable the toggle if true.
+	     */
+	    disabled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Overrides the inline-styles of the Toggle element.
+	     */
+	    elementStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Overrides the inline-styles of the Icon element.
+	     */
+	    iconStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Where the label will be placed next to the toggle.
+	     */
+	    labelPosition: _react2.default.PropTypes.oneOf(['left', 'right']),
+	
+	    /**
+	     * Overrides the inline-styles of the Toggle element label.
+	     */
+	    labelStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Callback function that is fired when the toggle switch is toggled.
+	     */
+	    onToggle: _react2.default.PropTypes.func,
+	
+	    /**
+	     * Override style of ripple.
+	     */
+	    rippleStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Override style for thumb.
+	     */
+	    thumbStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Toggled if set to true.
+	     */
+	    toggled: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * Override style for track.
+	     */
+	    trackStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * ValueLink prop for when using controlled toggle.
+	     */
+	    valueLink: _react2.default.PropTypes.object
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_stylePropable2.default],
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      defaultToggled: false,
+	      disabled: false,
+	      labelPosition: 'left'
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      switched: this.props.toggled || this.props.defaultToggled || this.props.valueLink && this.props.valueLink.value || false,
+	      muiTheme: this.context.muiTheme || (0, _getMuiTheme2.default)()
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	
+	  //to update theme inside state whenever a new theme is passed down
+	  //from the parent / owner using context
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	    this.setState({ muiTheme: newMuiTheme });
+	  },
+	  getTheme: function getTheme() {
+	    return this.state.muiTheme.toggle;
+	  },
+	  getStyles: function getStyles() {
+	    var toggleSize = 20;
+	    var toggleTrackWidth = 36;
+	    var styles = {
+	      icon: {
+	        width: 36,
+	        padding: '4px 0px 6px 2px'
+	      },
+	      toggleElement: {
+	        width: toggleTrackWidth
+	      },
+	      track: {
+	        transition: _transitions2.default.easeOut(),
+	        width: '100%',
+	        height: 14,
+	        borderRadius: 30,
+	        backgroundColor: this.getTheme().trackOffColor
+	      },
+	      thumb: {
+	        transition: _transitions2.default.easeOut(),
+	        position: 'absolute',
+	        top: 1,
+	        left: 0,
+	        width: toggleSize,
+	        height: toggleSize,
+	        lineHeight: '24px',
+	        borderRadius: '50%',
+	        backgroundColor: this.getTheme().thumbOffColor
+	      },
+	      trackWhenSwitched: {
+	        backgroundColor: this.getTheme().trackOnColor
+	      },
+	      thumbWhenSwitched: {
+	        backgroundColor: this.getTheme().thumbOnColor,
+	        left: '100%'
+	      },
+	      trackWhenDisabled: {
+	        backgroundColor: this.getTheme().trackDisabledColor
+	      },
+	      thumbWhenDisabled: {
+	        backgroundColor: this.getTheme().thumbDisabledColor
+	      },
+	      label: {
+	        color: this.props.disabled ? this.getTheme().labelDisabledColor : this.getTheme().labelColor,
+	        width: 'calc(100% - ' + (toggleTrackWidth + 10) + 'px)'
+	      }
+	    };
+	
+	    return styles;
+	  },
+	  isToggled: function isToggled() {
+	    return this.refs.enhancedSwitch.isSwitched();
+	  },
+	  setToggled: function setToggled(newToggledValue) {
+	    this.refs.enhancedSwitch.setSwitched(newToggledValue);
+	  },
+	  _handleToggle: function _handleToggle(e, isInputChecked) {
+	    if (this.props.onToggle) this.props.onToggle(e, isInputChecked);
+	  },
+	  _handleStateChange: function _handleStateChange(newSwitched) {
+	    this.setState({ switched: newSwitched });
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var onToggle = _props.onToggle;
+	
+	    var other = _objectWithoutProperties(_props, ['onToggle']);
+	
+	    var styles = this.getStyles();
+	
+	    var trackStyles = this.mergeStyles(styles.track, this.props.trackStyle, this.state.switched && styles.trackWhenSwitched, this.props.disabled && styles.trackWhenDisabled);
+	
+	    var thumbStyles = this.mergeStyles(styles.thumb, this.props.thumbStyle, this.state.switched && styles.thumbWhenSwitched, this.props.disabled && styles.thumbWhenDisabled);
+	
+	    if (this.state.switched) {
+	      thumbStyles.marginLeft = '-' + thumbStyles.width;
+	    }
+	
+	    var toggleElementStyles = this.mergeStyles(styles.toggleElement, this.props.elementStyle);
+	
+	    var toggleElement = _react2.default.createElement(
+	      'div',
+	      { style: this.prepareStyles(toggleElementStyles) },
+	      _react2.default.createElement('div', { style: this.prepareStyles(trackStyles) }),
+	      _react2.default.createElement(_paper2.default, { style: thumbStyles, circle: true, zDepth: 1 })
+	    );
+	
+	    var customRippleStyle = this.mergeStyles({
+	      top: -10,
+	      left: -10
+	    }, this.props.rippleStyle);
+	
+	    var rippleColor = this.state.switched ? this.getTheme().thumbOnColor : this.state.muiTheme.textColor;
+	
+	    var iconStyle = this.mergeStyles(styles.icon, this.props.iconStyle);
+	
+	    var labelStyle = this.mergeStyles(styles.label, this.props.labelStyle);
+	
+	    var enhancedSwitchProps = {
+	      ref: 'enhancedSwitch',
+	      inputType: 'checkbox',
+	      switchElement: toggleElement,
+	      rippleStyle: customRippleStyle,
+	      rippleColor: rippleColor,
+	      iconStyle: iconStyle,
+	      trackStyle: trackStyles,
+	      thumbStyle: thumbStyles,
+	      labelStyle: labelStyle,
+	      switched: this.state.switched,
+	      onSwitch: this._handleToggle,
+	      onParentShouldUpdate: this._handleStateChange,
+	      defaultSwitched: this.props.defaultToggled,
+	      labelPosition: this.props.labelPosition
+	    };
+	
+	    if (this.props.hasOwnProperty('toggled')) enhancedSwitchProps.checked = this.props.toggled;
+	
+	    return _react2.default.createElement(_enhancedSwitch2.default, _extends({}, other, enhancedSwitchProps));
+	  }
+	});
+	
+	exports.default = Toggle;
+	module.exports = exports['default'];
+
+/***/ },
+/* 334 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(158);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _keyCode = __webpack_require__(279);
+	
+	var _keyCode2 = _interopRequireDefault(_keyCode);
+	
+	var _stylePropable = __webpack_require__(213);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _transitions = __webpack_require__(237);
+	
+	var _transitions2 = _interopRequireDefault(_transitions);
+	
+	var _uniqueId = __webpack_require__(335);
+	
+	var _uniqueId2 = _interopRequireDefault(_uniqueId);
+	
+	var _windowListenable = __webpack_require__(290);
+	
+	var _windowListenable2 = _interopRequireDefault(_windowListenable);
+	
+	var _clearfix = __webpack_require__(336);
+	
+	var _clearfix2 = _interopRequireDefault(_clearfix);
+	
+	var _focusRipple = __webpack_require__(280);
+	
+	var _focusRipple2 = _interopRequireDefault(_focusRipple);
+	
+	var _touchRipple = __webpack_require__(286);
+	
+	var _touchRipple2 = _interopRequireDefault(_touchRipple);
+	
+	var _paper = __webpack_require__(209);
+	
+	var _paper2 = _interopRequireDefault(_paper);
+	
+	var _getMuiTheme = __webpack_require__(238);
+	
+	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+	
+	var _warning = __webpack_require__(161);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var EnhancedSwitch = _react2.default.createClass({
+	  displayName: 'EnhancedSwitch',
+	
+	  propTypes: {
+	    checked: _react2.default.PropTypes.bool,
+	
+	    /**
+	     * The css class name of the root element.
+	     */
+	    className: _react2.default.PropTypes.string,
+	    defaultSwitched: _react2.default.PropTypes.bool,
+	    disableFocusRipple: _react2.default.PropTypes.bool,
+	    disableTouchRipple: _react2.default.PropTypes.bool,
+	    disabled: _react2.default.PropTypes.bool,
+	    iconStyle: _react2.default.PropTypes.object,
+	    id: _react2.default.PropTypes.string,
+	    inputType: _react2.default.PropTypes.string.isRequired,
+	    label: _react2.default.PropTypes.node,
+	    labelPosition: _react2.default.PropTypes.oneOf(['left', 'right']),
+	    labelStyle: _react2.default.PropTypes.object,
+	    name: _react2.default.PropTypes.string,
+	    onBlur: _react2.default.PropTypes.func,
+	    onFocus: _react2.default.PropTypes.func,
+	    onMouseDown: _react2.default.PropTypes.func,
+	    onMouseLeave: _react2.default.PropTypes.func,
+	    onMouseUp: _react2.default.PropTypes.func,
+	    onParentShouldUpdate: _react2.default.PropTypes.func.isRequired,
+	    onSwitch: _react2.default.PropTypes.func,
+	    onTouchEnd: _react2.default.PropTypes.func,
+	    onTouchStart: _react2.default.PropTypes.func,
+	    required: _react2.default.PropTypes.bool,
+	    rippleColor: _react2.default.PropTypes.string,
+	    rippleStyle: _react2.default.PropTypes.object,
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object,
+	    switchElement: _react2.default.PropTypes.element.isRequired,
+	    switched: _react2.default.PropTypes.bool.isRequired,
+	    thumbStyle: _react2.default.PropTypes.object,
+	    trackStyle: _react2.default.PropTypes.object,
+	    value: _react2.default.PropTypes.string
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_windowListenable2.default, _stylePropable2.default],
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      isKeyboardFocused: false,
+	      parentWidth: 100,
+	      muiTheme: this.context.muiTheme || (0, _getMuiTheme2.default)()
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var inputNode = _reactDom2.default.findDOMNode(this.refs.checkbox);
+	    if (!this.props.switched || inputNode.checked !== this.props.switched) {
+	      this.props.onParentShouldUpdate(inputNode.checked);
+	    }
+	
+	    window.addEventListener('resize', this._handleResize);
+	
+	    this._handleResize();
+	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var hasCheckedLinkProp = nextProps.hasOwnProperty('checkedLink');
+	    var hasCheckedProp = nextProps.hasOwnProperty('checked');
+	    var hasToggledProp = nextProps.hasOwnProperty('toggled');
+	    var hasNewDefaultProp = nextProps.hasOwnProperty('defaultSwitched') && nextProps.defaultSwitched !== this.props.defaultSwitched;
+	    var newState = {};
+	    newState.muiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	
+	    if (hasCheckedProp) {
+	      newState.switched = nextProps.checked;
+	    } else if (hasToggledProp) {
+	      newState.switched = nextProps.toggled;
+	    } else if (hasCheckedLinkProp) {
+	      newState.switched = nextProps.checkedLink.value;
+	    } else if (hasNewDefaultProp) {
+	      newState.switched = nextProps.defaultSwitched;
+	    }
+	
+	    if (newState.switched !== undefined && newState.switched !== this.props.switched) {
+	      this.props.onParentShouldUpdate(newState.switched);
+	    }
+	
+	    this.setState(newState);
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    window.removeEventListener('resize', this._handleResize);
+	  },
+	
+	  windowListeners: {
+	    keydown: '_handleWindowKeydown',
+	    keyup: '_handleWindowKeyup'
+	  },
+	
+	  getEvenWidth: function getEvenWidth() {
+	    return parseInt(window.getComputedStyle(_reactDom2.default.findDOMNode(this.refs.root)).getPropertyValue('width'), 10);
+	  },
+	  getTheme: function getTheme() {
+	    return this.state.muiTheme.rawTheme.palette;
+	  },
+	  getStyles: function getStyles() {
+	    var spacing = this.state.muiTheme.rawTheme.spacing;
+	    var switchWidth = 60 - spacing.desktopGutterLess;
+	    var labelWidth = 'calc(100% - 60px)';
+	    var styles = {
+	      root: {
+	        position: 'relative',
+	        cursor: this.props.disabled ? 'default' : 'pointer',
+	        overflow: 'visible',
+	        display: 'table',
+	        height: 'auto',
+	        width: '100%'
+	      },
+	      input: {
+	        position: 'absolute',
+	        cursor: this.props.disabled ? 'default' : 'pointer',
+	        pointerEvents: 'all',
+	        opacity: 0,
+	        width: '100%',
+	        height: '100%',
+	        zIndex: 2,
+	        left: 0,
+	        boxSizing: 'border-box',
+	        padding: 0,
+	        margin: 0
+	      },
+	      controls: {
+	        width: '100%',
+	        height: '100%'
+	      },
+	      label: {
+	        float: 'left',
+	        position: 'relative',
+	        display: 'block',
+	        width: labelWidth,
+	        lineHeight: '24px',
+	        color: this.getTheme().textColor,
+	        fontFamily: this.state.muiTheme.rawTheme.fontFamily
+	      },
+	      wrap: {
+	        transition: _transitions2.default.easeOut(),
+	        float: 'left',
+	        position: 'relative',
+	        display: 'block',
+	        width: switchWidth,
+	        marginRight: this.props.labelPosition === 'right' ? spacing.desktopGutterLess : 0,
+	        marginLeft: this.props.labelPosition === 'left' ? spacing.desktopGutterLess : 0
+	      },
+	      ripple: {
+	        height: '200%',
+	        width: '200%',
+	        top: -12,
+	        left: -12
+	      }
+	    };
+	
+	    return styles;
+	  },
+	  isSwitched: function isSwitched() {
+	    return _reactDom2.default.findDOMNode(this.refs.checkbox).checked;
+	  },
+	
+	  // no callback here because there is no event
+	  setSwitched: function setSwitched(newSwitchedValue) {
+	    if (!this.props.hasOwnProperty('checked') || this.props.checked === false) {
+	      this.props.onParentShouldUpdate(newSwitchedValue);
+	      _reactDom2.default.findDOMNode(this.refs.checkbox).checked = newSwitchedValue;
+	    } else {
+	      process.env.NODE_ENV !== "production" ? (0, _warning2.default)(false, 'Cannot call set method while checked is defined as a property.') : undefined;
+	    }
+	  },
+	  getValue: function getValue() {
+	    return _reactDom2.default.findDOMNode(this.refs.checkbox).value;
+	  },
+	  isKeyboardFocused: function isKeyboardFocused() {
+	    return this.state.isKeyboardFocused;
+	  },
+	  _handleChange: function _handleChange(e) {
+	    this._tabPressed = false;
+	    this.setState({
+	      isKeyboardFocused: false
+	    });
+	
+	    var isInputChecked = _reactDom2.default.findDOMNode(this.refs.checkbox).checked;
+	
+	    if (!this.props.hasOwnProperty('checked')) {
+	      this.props.onParentShouldUpdate(isInputChecked);
+	    }
+	    if (this.props.onSwitch) {
+	      this.props.onSwitch(e, isInputChecked);
+	    }
+	  },
+	
+	  // Checkbox inputs only use SPACE to change their state. Using ENTER will
+	  // update the ui but not the input.
+	  _handleWindowKeydown: function _handleWindowKeydown(e) {
+	    if (e.keyCode === _keyCode2.default.TAB) {
+	      this._tabPressed = true;
+	    }
+	    if (e.keyCode === _keyCode2.default.SPACE && this.state.isKeyboardFocused) {
+	      this._handleChange(e);
+	    }
+	  },
+	  _handleWindowKeyup: function _handleWindowKeyup(e) {
+	    if (e.keyCode === _keyCode2.default.SPACE && this.state.isKeyboardFocused) {
+	      this._handleChange(e);
+	    }
+	  },
+	
+	  /**
+	   * Because both the ripples and the checkbox input cannot share pointer
+	   * events, the checkbox input takes control of pointer events and calls
+	   * ripple animations manually.
+	   */
+	  _handleMouseDown: function _handleMouseDown(e) {
+	    //only listen to left clicks
+	    if (e.button === 0) {
+	      this.refs.touchRipple.start(e);
+	    }
+	  },
+	  _handleMouseUp: function _handleMouseUp() {
+	    this.refs.touchRipple.end();
+	  },
+	  _handleMouseLeave: function _handleMouseLeave() {
+	    this.refs.touchRipple.end();
+	  },
+	  _handleTouchStart: function _handleTouchStart(e) {
+	    this.refs.touchRipple.start(e);
+	  },
+	  _handleTouchEnd: function _handleTouchEnd() {
+	    this.refs.touchRipple.end();
+	  },
+	  _handleBlur: function _handleBlur(e) {
+	    this.setState({
+	      isKeyboardFocused: false
+	    });
+	
+	    if (this.props.onBlur) {
+	      this.props.onBlur(e);
+	    }
+	  },
+	  _handleFocus: function _handleFocus(e) {
+	    var _this = this;
+	
+	    //setTimeout is needed becuase the focus event fires first
+	    //Wait so that we can capture if this was a keyboard focus
+	    //or touch focus
+	    setTimeout(function () {
+	      if (_this._tabPressed) {
+	        _this.setState({
+	          isKeyboardFocused: true
+	        });
+	      }
+	    }, 150);
+	
+	    if (this.props.onFocus) {
+	      this.props.onFocus(e);
+	    }
+	  },
+	  _handleResize: function _handleResize() {
+	    this.setState({ parentWidth: this.getEvenWidth() });
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var name = _props.name;
+	    var value = _props.value;
+	    var label = _props.label;
+	    var onSwitch = _props.onSwitch;
+	    var defaultSwitched = _props.defaultSwitched;
+	    var onBlur = _props.onBlur;
+	    var onFocus = _props.onFocus;
+	    var onMouseUp = _props.onMouseUp;
+	    var onMouseDown = _props.onMouseDown;
+	    var onMouseLeave = _props.onMouseLeave;
+	    var onTouchStart = _props.onTouchStart;
+	    var onTouchEnd = _props.onTouchEnd;
+	    var disableTouchRipple = _props.disableTouchRipple;
+	    var disableFocusRipple = _props.disableFocusRipple;
+	    var className = _props.className;
+	
+	    var other = _objectWithoutProperties(_props, ['name', 'value', 'label', 'onSwitch', 'defaultSwitched', 'onBlur', 'onFocus', 'onMouseUp', 'onMouseDown', 'onMouseLeave', 'onTouchStart', 'onTouchEnd', 'disableTouchRipple', 'disableFocusRipple', 'className']);
+	
+	    var styles = this.getStyles();
+	    var wrapStyles = this.mergeStyles(styles.wrap, this.props.iconStyle);
+	    var rippleStyle = this.mergeStyles(styles.ripple, this.props.rippleStyle);
+	    var rippleColor = this.props.hasOwnProperty('rippleColor') ? this.props.rippleColor : this.getTheme().primary1Color;
+	
+	    if (this.props.thumbStyle) {
+	      wrapStyles.marginLeft /= 2;
+	      wrapStyles.marginRight /= 2;
+	    }
+	
+	    var inputId = this.props.id || _uniqueId2.default.generate();
+	
+	    var labelStyle = this.mergeStyles(styles.label, this.props.labelStyle);
+	    var labelElement = this.props.label ? _react2.default.createElement(
+	      'label',
+	      { style: this.prepareStyles(labelStyle), htmlFor: inputId },
+	      this.props.label
+	    ) : null;
+	
+	    var inputProps = {
+	      ref: 'checkbox',
+	      type: this.props.inputType,
+	      style: this.prepareStyles(styles.input),
+	      name: this.props.name,
+	      value: this.props.value,
+	      defaultChecked: this.props.defaultSwitched,
+	      onBlur: this._handleBlur,
+	      onFocus: this._handleFocus
+	    };
+	
+	    var hideTouchRipple = this.props.disabled || disableTouchRipple;
+	
+	    if (!hideTouchRipple) {
+	      inputProps.onMouseUp = this._handleMouseUp;
+	      inputProps.onMouseDown = this._handleMouseDown;
+	      inputProps.onMouseLeave = this._handleMouseLeave;
+	      inputProps.onTouchStart = this._handleTouchStart;
+	      inputProps.onTouchEnd = this._handleTouchEnd;
+	    }
+	
+	    if (!this.props.hasOwnProperty('checkedLink')) {
+	      inputProps.onChange = this._handleChange;
+	    }
+	
+	    var inputElement = _react2.default.createElement('input', _extends({}, other, inputProps));
+	
+	    var touchRipple = _react2.default.createElement(_touchRipple2.default, {
+	      ref: 'touchRipple',
+	      key: 'touchRipple',
+	      style: rippleStyle,
+	      color: rippleColor,
+	      muiTheme: this.state.muiTheme,
+	      centerRipple: true
+	    });
+	
+	    var focusRipple = _react2.default.createElement(_focusRipple2.default, {
+	      key: 'focusRipple',
+	      innerStyle: rippleStyle,
+	      color: rippleColor,
+	      muiTheme: this.state.muiTheme,
+	      show: this.state.isKeyboardFocused
+	    });
+	
+	    var ripples = [hideTouchRipple ? null : touchRipple, this.props.disabled || disableFocusRipple ? null : focusRipple];
+	
+	    // If toggle component (indicated by whether the style includes thumb) manually lay out
+	    // elements in order to nest ripple elements
+	    var switchElement = !this.props.thumbStyle ? _react2.default.createElement(
+	      'div',
+	      { style: this.prepareStyles(wrapStyles) },
+	      this.props.switchElement,
+	      ripples
+	    ) : _react2.default.createElement(
+	      'div',
+	      { style: this.prepareStyles(wrapStyles) },
+	      _react2.default.createElement('div', { style: this.prepareStyles(this.props.trackStyle) }),
+	      _react2.default.createElement(
+	        _paper2.default,
+	        { style: this.props.thumbStyle, zDepth: 1, circle: true },
+	        ' ',
+	        ripples,
+	        ' '
+	      )
+	    );
+	
+	    var labelPositionExist = this.props.labelPosition;
+	
+	    // Position is left if not defined or invalid.
+	    var elementsInOrder = labelPositionExist && this.props.labelPosition.toUpperCase() === 'RIGHT' ? _react2.default.createElement(
+	      _clearfix2.default,
+	      { style: styles.controls },
+	      switchElement,
+	      labelElement
+	    ) : _react2.default.createElement(
+	      _clearfix2.default,
+	      { style: styles.controls },
+	      labelElement,
+	      switchElement
+	    );
+	
+	    return _react2.default.createElement(
+	      'div',
+	      { ref: 'root', className: className, style: this.prepareStyles(styles.root, this.props.style) },
+	      inputElement,
+	      elementsInOrder
+	    );
+	  }
+	});
+	
+	exports.default = EnhancedSwitch;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 335 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var index = 0;
+	
+	exports.default = {
+	  generate: function generate() {
+	    return 'mui-id-' + index++;
+	  }
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 336 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beforeAfterWrapper = __webpack_require__(337);
+	
+	var _beforeAfterWrapper2 = _interopRequireDefault(_beforeAfterWrapper);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	var styles = {
+	  before: {
+	    content: "' '",
+	    display: 'table'
+	  },
+	  after: {
+	    content: "' '",
+	    clear: 'both',
+	    display: 'table'
+	  }
+	};
+	
+	var ClearFix = function ClearFix(_ref) {
+	  var style = _ref.style;
+	  var children = _ref.children;
+	
+	  var other = _objectWithoutProperties(_ref, ['style', 'children']);
+	
+	  return _react2.default.createElement(
+	    _beforeAfterWrapper2.default,
+	    _extends({}, other, {
+	      beforeStyle: styles.before,
+	      afterStyle: styles.after,
+	      style: style
+	    }),
+	    children
+	  );
+	};
+	
+	ClearFix.displayName = 'ClearFix';
+	
+	ClearFix.propTypes = {
+	  children: _react2.default.PropTypes.node,
+	
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react2.default.PropTypes.object
+	};
+	
+	exports.default = ClearFix;
+	module.exports = exports['default'];
+
+/***/ },
+/* 337 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _stylePropable = __webpack_require__(213);
+	
+	var _stylePropable2 = _interopRequireDefault(_stylePropable);
+	
+	var _getMuiTheme = __webpack_require__(238);
+	
+	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	/**
+	 *  BeforeAfterWrapper
+	 *    An alternative for the ::before and ::after css pseudo-elements for
+	 *    components whose styles are defined in javascript instead of css.
+	 *
+	 *  Usage: For the element that we want to apply before and after elements to,
+	 *    wrap its children with BeforeAfterWrapper. For example:
+	 *
+	 *                                            <Paper>
+	 *  <Paper>                                     <div> // See notice
+	 *    <BeforeAfterWrapper>        renders         <div/> // before element
+	 *      [children of paper]       ------>         [children of paper]
+	 *    </BeforeAfterWrapper>                       <div/> // after element
+	 *  </Paper>                                    </div>
+	 *                                            </Paper>
+	 *
+	 *  Notice: Notice that this div bundles together our elements. If the element
+	 *    that we want to apply before and after elements is a HTML tag (i.e. a
+	 *    div, p, or button tag), we can avoid this extra nesting by passing using
+	 *    the BeforeAfterWrapper in place of said tag like so:
+	 *
+	 *  <p>
+	 *    <BeforeAfterWrapper>   do this instead   <BeforeAfterWrapper elementType='p'>
+	 *      [children of p]          ------>         [children of p]
+	 *    </BeforeAfterWrapper>                    </BeforeAfterWrapper>
+	 *  </p>
+	 *
+	 *  BeforeAfterWrapper features spread functionality. This means that we can
+	 *  pass HTML tag properties directly into the BeforeAfterWrapper tag.
+	 *
+	 *  When using BeforeAfterWrapper, ensure that the parent of the beforeElement
+	 *  and afterElement have a defined style position.
+	 */
+	
+	var BeforeAfterWrapper = _react2.default.createClass({
+	  displayName: 'BeforeAfterWrapper',
+	
+	  propTypes: {
+	    afterElementType: _react2.default.PropTypes.string,
+	    afterStyle: _react2.default.PropTypes.object,
+	    beforeElementType: _react2.default.PropTypes.string,
+	    beforeStyle: _react2.default.PropTypes.object,
+	    children: _react2.default.PropTypes.node,
+	    elementType: _react2.default.PropTypes.string,
+	
+	    /**
+	     * Override the inline-styles of the root element.
+	     */
+	    style: _react2.default.PropTypes.object
+	  },
+	
+	  contextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  //for passing default theme context to children
+	  childContextTypes: {
+	    muiTheme: _react2.default.PropTypes.object
+	  },
+	
+	  mixins: [_stylePropable2.default],
+	
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      beforeElementType: 'div',
+	      afterElementType: 'div',
+	      elementType: 'div'
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      muiTheme: this.context.muiTheme || (0, _getMuiTheme2.default)()
+	    };
+	  },
+	  getChildContext: function getChildContext() {
+	    return {
+	      muiTheme: this.state.muiTheme
+	    };
+	  },
+	
+	  //to update theme inside state whenever a new theme is passed down
+	  //from the parent / owner using context
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps, nextContext) {
+	    var newMuiTheme = nextContext.muiTheme ? nextContext.muiTheme : this.state.muiTheme;
+	    this.setState({ muiTheme: newMuiTheme });
+	  },
+	  render: function render() {
+	    var _props = this.props;
+	    var beforeStyle = _props.beforeStyle;
+	    var afterStyle = _props.afterStyle;
+	    var beforeElementType = _props.beforeElementType;
+	    var afterElementType = _props.afterElementType;
+	    var elementType = _props.elementType;
+	
+	    var other = _objectWithoutProperties(_props, ['beforeStyle', 'afterStyle', 'beforeElementType', 'afterElementType', 'elementType']);
+	
+	    var beforeElement = undefined;
+	    var afterElement = undefined;
+	
+	    beforeStyle = {
+	      boxSizing: 'border-box'
+	    };
+	
+	    afterStyle = {
+	      boxSizing: 'border-box'
+	    };
+	
+	    if (this.props.beforeStyle) beforeElement = _react2.default.createElement(this.props.beforeElementType, {
+	      style: this.prepareStyles(beforeStyle, this.props.beforeStyle),
+	      key: '::before'
+	    });
+	    if (this.props.afterStyle) afterElement = _react2.default.createElement(this.props.afterElementType, {
+	      style: this.prepareStyles(afterStyle, this.props.afterStyle),
+	      key: '::after'
+	    });
+	
+	    var children = [beforeElement, this.props.children, afterElement];
+	
+	    var props = other;
+	    props.style = this.prepareStyles(this.props.style);
+	
+	    return _react2.default.createElement(this.props.elementType, props, children);
+	  }
+	});
+	
+	exports.default = BeforeAfterWrapper;
+	module.exports = exports['default'];
+
+/***/ },
+/* 338 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var defaultClickRejectionStrategy = __webpack_require__(339);
+	
+	module.exports = function injectTapEventPlugin (strategyOverrides) {
+	  strategyOverrides = strategyOverrides || {}
+	  var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;
+	
+	  __webpack_require__(31).injection.injectEventPluginsByName({
+	    "TapEventPlugin":       __webpack_require__(340)(shouldRejectClick)
+	  });
+	};
+
+
+/***/ },
+/* 339 */
+/***/ function(module, exports) {
+
+	module.exports = function(lastTouchEvent, clickTimestamp) {
+	  if (lastTouchEvent && (clickTimestamp - lastTouchEvent) < 750) {
+	    return true;
+	  }
+	};
+
+
+/***/ },
+/* 340 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TapEventPlugin
+	 * @typechecks static-only
+	 */
+	
+	"use strict";
+	
+	var EventConstants = __webpack_require__(30);
+	var EventPluginUtils = __webpack_require__(33);
+	var EventPropagators = __webpack_require__(73);
+	var SyntheticUIEvent = __webpack_require__(87);
+	var TouchEventUtils = __webpack_require__(341);
+	var ViewportMetrics = __webpack_require__(38);
+	
+	var keyOf = __webpack_require__(342);
+	var topLevelTypes = EventConstants.topLevelTypes;
+	
+	var isStartish = EventPluginUtils.isStartish;
+	var isEndish = EventPluginUtils.isEndish;
+	
+	var isTouch = function(topLevelType) {
+	  var touchTypes = [
+	    topLevelTypes.topTouchCancel,
+	    topLevelTypes.topTouchEnd,
+	    topLevelTypes.topTouchStart,
+	    topLevelTypes.topTouchMove
+	  ];
+	  return touchTypes.indexOf(topLevelType) >= 0;
+	}
+	
+	/**
+	 * Number of pixels that are tolerated in between a `touchStart` and `touchEnd`
+	 * in order to still be considered a 'tap' event.
+	 */
+	var tapMoveThreshold = 10;
+	var ignoreMouseThreshold = 750;
+	var startCoords = {x: null, y: null};
+	var lastTouchEvent = null;
+	
+	var Axis = {
+	  x: {page: 'pageX', client: 'clientX', envScroll: 'currentPageScrollLeft'},
+	  y: {page: 'pageY', client: 'clientY', envScroll: 'currentPageScrollTop'}
+	};
+	
+	function getAxisCoordOfEvent(axis, nativeEvent) {
+	  var singleTouch = TouchEventUtils.extractSingleTouch(nativeEvent);
+	  if (singleTouch) {
+	    return singleTouch[axis.page];
+	  }
+	  return axis.page in nativeEvent ?
+	    nativeEvent[axis.page] :
+	    nativeEvent[axis.client] + ViewportMetrics[axis.envScroll];
+	}
+	
+	function getDistance(coords, nativeEvent) {
+	  var pageX = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	  var pageY = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	  return Math.pow(
+	    Math.pow(pageX - coords.x, 2) + Math.pow(pageY - coords.y, 2),
+	    0.5
+	  );
+	}
+	
+	var touchEvents = [
+	  topLevelTypes.topTouchStart,
+	  topLevelTypes.topTouchCancel,
+	  topLevelTypes.topTouchEnd,
+	  topLevelTypes.topTouchMove,
+	];
+	
+	var dependencies = [
+	  topLevelTypes.topMouseDown,
+	  topLevelTypes.topMouseMove,
+	  topLevelTypes.topMouseUp,
+	].concat(touchEvents);
+	
+	var eventTypes = {
+	  touchTap: {
+	    phasedRegistrationNames: {
+	      bubbled: keyOf({onTouchTap: null}),
+	      captured: keyOf({onTouchTapCapture: null})
+	    },
+	    dependencies: dependencies
+	  }
+	};
+	
+	var now = (function() {
+	  if (Date.now) {
+	    return Date.now;
+	  } else {
+	    // IE8 support: http://stackoverflow.com/questions/9430357/please-explain-why-and-how-new-date-works-as-workaround-for-date-now-in
+	    return function () {
+	      return +new Date;
+	    }
+	  }
+	})();
+	
+	function createTapEventPlugin(shouldRejectClick) {
+	  return {
+	
+	    tapMoveThreshold: tapMoveThreshold,
+	
+	    ignoreMouseThreshold: ignoreMouseThreshold,
+	
+	    eventTypes: eventTypes,
+	
+	    /**
+	     * @param {string} topLevelType Record from `EventConstants`.
+	     * @param {DOMEventTarget} topLevelTarget The listening component root node.
+	     * @param {string} topLevelTargetID ID of `topLevelTarget`.
+	     * @param {object} nativeEvent Native browser event.
+	     * @return {*} An accumulation of synthetic events.
+	     * @see {EventPluginHub.extractEvents}
+	     */
+	    extractEvents: function(
+	        topLevelType,
+	        topLevelTarget,
+	        topLevelTargetID,
+	        nativeEvent,
+	        nativeEventTarget) {
+	
+	      if (isTouch(topLevelType)) {
+	        lastTouchEvent = now();
+	      } else {
+	        if (shouldRejectClick(lastTouchEvent, now())) {
+	          return null;
+	        }
+	      }
+	
+	      if (!isStartish(topLevelType) && !isEndish(topLevelType)) {
+	        return null;
+	      }
+	      var event = null;
+	      var distance = getDistance(startCoords, nativeEvent);
+	      if (isEndish(topLevelType) && distance < tapMoveThreshold) {
+	        event = SyntheticUIEvent.getPooled(
+	          eventTypes.touchTap,
+	          topLevelTargetID,
+	          nativeEvent,
+	          nativeEventTarget
+	        );
+	      }
+	      if (isStartish(topLevelType)) {
+	        startCoords.x = getAxisCoordOfEvent(Axis.x, nativeEvent);
+	        startCoords.y = getAxisCoordOfEvent(Axis.y, nativeEvent);
+	      } else if (isEndish(topLevelType)) {
+	        startCoords.x = 0;
+	        startCoords.y = 0;
+	      }
+	      EventPropagators.accumulateTwoPhaseDispatches(event);
+	      return event;
+	    }
+	
+	  };
+	}
+	
+	module.exports = createTapEventPlugin;
+
+
+/***/ },
+/* 341 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 *
+	 * @providesModule TouchEventUtils
+	 */
+	
+	var TouchEventUtils = {
+	  /**
+	   * Utility function for common case of extracting out the primary touch from a
+	   * touch event.
+	   * - `touchEnd` events usually do not have the `touches` property.
+	   *   http://stackoverflow.com/questions/3666929/
+	   *   mobile-sarai-touchend-event-not-firing-when-last-touch-is-removed
+	   *
+	   * @param {Event} nativeEvent Native event that may or may not be a touch.
+	   * @return {TouchesObject?} an object with pageX and pageY or null.
+	   */
+	  extractSingleTouch: function(nativeEvent) {
+	    var touches = nativeEvent.touches;
+	    var changedTouches = nativeEvent.changedTouches;
+	    var hasTouches = touches && touches.length > 0;
+	    var hasChangedTouches = changedTouches && changedTouches.length > 0;
+	
+	    return !hasTouches && hasChangedTouches ? changedTouches[0] :
+	           hasTouches ? touches[0] :
+	           nativeEvent;
+	  }
+	};
+	
+	module.exports = TouchEventUtils;
+
+
+/***/ },
+/* 342 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule keyOf
+	 */
+	
+	/**
+	 * Allows extraction of a minified key. Let's the build system minify keys
+	 * without losing the ability to dynamically use key strings as values
+	 * themselves. Pass in an object with a single key/val pair and it will return
+	 * you the string key of that single record. Suppose you want to grab the
+	 * value for a key 'className' inside of an object. Key/val minification may
+	 * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+	 * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+	 * reuse those resolutions.
+	 */
+	"use strict";
+	
+	var keyOf = function (oneKeyObj) {
+	  var key;
+	  for (key in oneKeyObj) {
+	    if (!oneKeyObj.hasOwnProperty(key)) {
+	      continue;
+	    }
+	    return key;
+	  }
+	  return null;
+	};
+	
+	module.exports = keyOf;
 
 /***/ }
 /******/ ]);

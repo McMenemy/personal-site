@@ -118,14 +118,17 @@ module.exports = function () {
   };
 
   View.prototype.addConstellations = function () {
+    var unit = this.starRadius * 6; // unit equal to 3 star diameters
     var constellations = [];
 
     var testQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten" - Neil Gaiman';
+    var anchorX = this.width / 3;
+    var anchorY = this.height * 1 / 5;
     var testStars = [new Universe.Star({
       constellationRef: 0,
-      pos: [200, 200],
+      pos: [anchorX, anchorY],
       connections: [1],
-      radius: this.starRadius,
+      radius: this.starRadius * 3,
     }), new Universe.Star({
       constellationRef: 0,
       pos: [275, 300],
