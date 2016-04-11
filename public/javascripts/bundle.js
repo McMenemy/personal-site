@@ -37039,52 +37039,59 @@
 	    var unit = this.starRadius * 6; // unit equal to 3 star diameters
 	    var constellations = [];
 	
-	    var testQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten" - Neil Gaiman';
-	    var anchorX = this.width / 3;
-	    var anchorY = this.height * 1 / 5;
-	    var testStars = [new Universe.Star({
+	    var bookQuote = '"Employ your time in improving yourself by other\'s writings so that you shall come easily by what others have labored hard for." - Socrates';
+	    var anchorX = this.width * 18 / 100;
+	    var anchorY = this.height * 25 / 100;
+	    var bookStars = [new Universe.Star({
 	      constellationRef: 0,
 	      pos: [anchorX, anchorY],
-	      connections: [1],
-	      radius: this.starRadius * 3
-	    }), new Universe.Star({
-	      constellationRef: 0,
-	      pos: [275, 300],
-	      connections: [],
-	      radius: this.starRadius
-	    }), new Universe.Star({
-	      constellationRef: 0,
-	      pos: [225, 250],
-	      connections: [0],
-	      radius: this.starRadius
-	    })];
-	    var testConstellation = new Universe.Constellation(testStars, testQuote);
-	    constellations.push(testConstellation);
-	
-	    var testQuote2 = '"You will become as small as your controlling desire, or as great as your dominant aspiration" - James Allen';
-	    var testStars2 = [new Universe.Star({
-	      constellationRef: 1,
-	      pos: [450, 175],
-	      connections: [1],
-	      radius: this.starRadius
-	    }), new Universe.Star({
-	      constellationRef: 1,
-	      pos: [425, 195],
-	      connections: [],
-	      radius: this.starRadius
-	    }), new Universe.Star({
-	      constellationRef: 1,
-	      pos: [490, 160],
-	      connections: [0],
-	      radius: this.starRadius
-	    }), new Universe.Star({
-	      constellationRef: 1,
-	      pos: [485, 125],
 	      connections: [1, 2],
 	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 0,
+	      pos: [anchorX + 2 * unit, anchorY + 4 * unit],
+	      connections: [],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 0,
+	      pos: [anchorX + 4 * unit, anchorY - 1 * unit],
+	      connections: [3],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 0,
+	      pos: [anchorX + 6 * unit, anchorY + 3 * unit],
+	      connections: [1, 3],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 0,
+	      pos: [anchorX + 7 * unit, anchorY - 3 * unit],
+	      connections: [2],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 0,
+	      pos: [anchorX + 9 * unit, anchorY + 1 * unit],
+	      connections: [3, 4],
+	      radius: this.starRadius
 	    })];
-	    var testConstellation2 = new Universe.Constellation(testStars2, testQuote2);
-	    constellations.push(testConstellation2);
+	    var bookConstellation = new Universe.Constellation(bookStars, bookQuote);
+	    constellations.push(bookConstellation);
+	
+	    var anchorX = this.width * 45 / 100;
+	    var anchorY = this.height * 30 / 100;
+	    var dragonQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten." - Neil Gaiman"';
+	    var dragonStars = [new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX, anchorY],
+	      connections: [1],
+	      radius: this.starRadius * 2
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 9 * unit, anchorY + 1 * unit],
+	      connections: [],
+	      radius: this.starRadius
+	    })];
+	    var dragonConstellation = new Universe.Constellation(dragonStars, dragonQuote);
+	    constellations.push(dragonConstellation);
 	
 	    return constellations;
 	  };
