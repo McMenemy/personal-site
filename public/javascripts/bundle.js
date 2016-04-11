@@ -36906,7 +36906,7 @@
 	    this.largeFontSize = (this.width / 20).toString() + 'px';
 	    this.smallFontSize = (parseInt(this.largeFontSize) / 2).toString() + 'px';
 	    this.starRadius = 0.003 * width;
-	    this.quote = 'Hover cursor over white dots to find constellations and wisdom';
+	    this.quote = 'Hover your cursor over white dots to find constellations and wisdom';
 	    canvas.width = width;
 	    canvas.height = height;
 	    var ctx = canvas.getContext('2d');
@@ -37004,7 +37004,7 @@
 	  View.prototype.addConstellations = function () {
 	    var constellations = [];
 	
-	    var testQuote = 'Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten — Neil Gaiman';
+	    var testQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten" - Neil Gaiman';
 	    var testStars = [new Universe.Star({
 	      constellationRef: 0,
 	      pos: [200, 200],
@@ -37024,7 +37024,7 @@
 	    var testConstellation = new Universe.Constellation(testStars, testQuote);
 	    constellations.push(testConstellation);
 	
-	    var testQuote2 = 'You will become as small as your controlling desire, or as great as your dominant aspiration - James Allen';
+	    var testQuote2 = '"You will become as small as your controlling desire, or as great as your dominant aspiration" - James Allen';
 	    var testStars2 = [new Universe.Star({
 	      constellationRef: 1,
 	      pos: [450, 175],
