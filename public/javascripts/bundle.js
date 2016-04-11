@@ -49,11 +49,15 @@
 	var Router = __webpack_require__(159).Router;
 	var Route = __webpack_require__(159).Route;
 	var IndexRoute = __webpack_require__(159).IndexRoute;
+	var injectTapEventPlugin = __webpack_require__(338);
 	
 	// components
 	var App = __webpack_require__(208);
 	var CanvasBackground = __webpack_require__(310);
 	var Projects = __webpack_require__(314);
+	
+	// used for expand boxes and touch tap
+	injectTapEventPlugin();
 	
 	// routes
 	var routes = React.createElement(
@@ -37154,7 +37158,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var injectTapEventPlugin = __webpack_require__(338);
 	
 	// style
 	var Paper = __webpack_require__(209);
@@ -37173,7 +37176,6 @@
 	
 	
 	  getInitialState: function () {
-	    injectTapEventPlugin();
 	    return { expanded: true };
 	  },
 	

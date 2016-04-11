@@ -1,5 +1,4 @@
 var React = require('react');
-var injectTapEventPlugin = require('react-tap-event-plugin');
 
 // style
 var Paper = require('material-ui/lib/paper');
@@ -16,7 +15,6 @@ var Toggle = require('material-ui/lib/toggle');
 var Projects = React.createClass({
 
   getInitialState: function () {
-    injectTapEventPlugin();
     return { expanded: true, };
   },
 
