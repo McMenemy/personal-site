@@ -122,8 +122,8 @@ module.exports = function () {
     var constellations = [];
 
     var bookQuote = '"Employ your time in improving yourself by other\'s writings so that you shall come easily by what others have labored hard for." - Socrates';
-    var anchorX = this.width * 18 / 100;
-    var anchorY = this.height * 25 / 100;
+    var anchorX = this.width * 10 / 100;
+    var anchorY = this.height * 15 / 100;
     var bookStars = [new Universe.Star({
       constellationRef: 0,
       pos: [anchorX, anchorY],
@@ -159,9 +159,10 @@ module.exports = function () {
     var bookConstellation = new Universe.Constellation(bookStars, bookQuote);
     constellations.push(bookConstellation);
 
-    var anchorX = this.width * 45 / 100;
-    var anchorY = this.height * 30 / 100;
-    var dragonQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten." - Neil Gaiman"';
+    var scale = 1.5; // used to resive with one number
+    var anchorX = this.width * 30 / 100;
+    var anchorY = this.height * 35 / 100;
+    var dragonQuote = '"Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten." - Neil Gaiman';
     var dragonStars = [new Universe.Star({
       constellationRef: 1,
       pos: [anchorX, anchorY],
@@ -169,73 +170,178 @@ module.exports = function () {
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 2 * unit, anchorY - 4 * unit],
+      pos: [anchorX + 2 * unit * scale, anchorY - 4 * unit * scale],
       connections: [4],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 12 * unit, anchorY + 3 * unit],
+      pos: [anchorX + 12 * unit * scale, anchorY + 3 * unit * scale],
       connections: [],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 10 * unit, anchorY - 1 * unit],
+      pos: [anchorX + 10 * unit * scale, anchorY - 1 * unit * scale],
       connections: [],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 12 * unit, anchorY - 5 * unit],
+      pos: [anchorX + 12 * unit * scale, anchorY - 5 * unit * scale],
       connections: [5],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 19 * unit, anchorY - 5.5 * unit],
+      pos: [anchorX + 19 * unit * scale, anchorY - 5.5 * unit * scale],
       connections: [6],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 27 * unit, anchorY - 5.8 * unit],
+      pos: [anchorX + 27 * unit * scale, anchorY - 5.8 * unit * scale],
       connections: [7],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 19 * unit, anchorY - 3 * unit],
+      pos: [anchorX + 19 * unit * scale, anchorY - 3 * unit * scale],
       connections: [8],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 26 * unit, anchorY - 1.5 * unit],
+      pos: [anchorX + 26 * unit * scale, anchorY - 1.5 * unit * scale],
       connections: [9],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 29 * unit, anchorY + 1.5 * unit],
+      pos: [anchorX + 29 * unit * scale, anchorY + 1.5 * unit * scale],
       connections: [10],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 21 * unit, anchorY + 1 * unit],
+      pos: [anchorX + 21 * unit * scale, anchorY + 1 * unit * scale],
       connections: [],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 13 * unit, anchorY - 3.5 * unit],
+      pos: [anchorX + 13 * unit * scale, anchorY - 3.5 * unit * scale],
       connections: [12],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 13 * unit, anchorY - 2 * unit],
+      pos: [anchorX + 13 * unit * scale, anchorY - 2 * unit * scale],
       connections: [13],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 1,
-      pos: [anchorX + 15 * unit, anchorY - 3 * unit],
+      pos: [anchorX + 15 * unit * scale, anchorY - 3 * unit * scale],
       connections: [11],
       radius: this.starRadius,
     }),
     ];
     var dragonConstellation = new Universe.Constellation(dragonStars, dragonQuote);
     constellations.push(dragonConstellation);
+
+    var scale = 1; // used to resive with one number
+    var anchorX = this.width * 50 / 100;
+    var anchorY = this.height * 15 / 100;
+    var choiceQuote = '"You will become as small as your controlling desire, or as great as your dominant aspiration" - James Allen';
+    var choiceStars = [new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX, anchorY],
+      connections: [1],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 15 * unit * scale, anchorY - 3 * unit * scale],
+      connections: [2],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 25 * unit * scale, anchorY - 10 * unit * scale],
+      connections: [3, 4],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 23 * unit * scale, anchorY - 11 * unit * scale],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 24 * unit * scale, anchorY - 7 * unit * scale],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 2 * unit * scale, anchorY + 2 * unit * scale],
+      connections: [6],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 16 * unit * scale, anchorY + 3.5 * unit * scale],
+      connections: [7],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 26 * unit * scale, anchorY + 10.5 * unit * scale],
+      connections: [8, 9],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 23 * unit * scale, anchorY + 10 * unit * scale],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 2,
+      pos: [anchorX + 25 * unit * scale, anchorY + 8 * unit * scale],
+      connections: [],
+      radius: this.starRadius,
+    }),
+    ];
+    var choiceConstellation = new Universe.Constellation(choiceStars, choiceQuote);
+    constellations.push(choiceConstellation);
+
+    var anchorX = this.width * 85 / 100;
+    var anchorY = this.height * 10 / 100;
+    var impossibleQuote = '"The person who says it cannot be done should not interrupt the person doing it." - Chinese Proverb';
+    var impossibleStars = [new Universe.Star({
+      constellationRef: 3,
+      pos: [anchorX, anchorY],
+      connections: [1, 2],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 3,
+      pos: [anchorX - 6 * unit, anchorY + 8 * unit],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 3,
+      pos: [anchorX + 6 * unit, anchorY + 8 * unit],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 3,
+      pos: [anchorX + 1 * unit, anchorY + 6 * unit],
+      connections: [1, 2],
+      radius: this.starRadius,
+    }),
+    ];
+    var impossibleConstellation = new Universe.Constellation(impossibleStars, impossibleQuote);
+    constellations.push(impossibleConstellation);
+
+    var anchorX = this.width * 80 / 100;
+    var anchorY = this.height * 35 / 100;
+    var kickQuote = '"I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times. - Bruce Lee';
+    var kickStars = [new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX, anchorY],
+      connections: [1],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX - 6 * unit, anchorY + 8 * unit],
+      connections: [],
+      radius: this.starRadius,
+    }),
+    ];
+    var kickConstellation = new Universe.Constellation(kickStars, kickQuote);
+    constellations.push(kickConstellation);
 
     return constellations;
   };
