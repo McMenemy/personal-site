@@ -37036,7 +37036,7 @@
 	  };
 	
 	  View.prototype.addConstellations = function () {
-	    var unit = this.starRadius * 6; // unit equal to 3 star diameters
+	    var unit = this.starRadius * 2; // unit equal to 3 star diameters
 	    var constellations = [];
 	
 	    var bookQuote = '"Employ your time in improving yourself by other\'s writings so that you shall come easily by what others have labored hard for." - Socrates';
@@ -37049,27 +37049,27 @@
 	      radius: this.starRadius
 	    }), new Universe.Star({
 	      constellationRef: 0,
-	      pos: [anchorX + 2 * unit, anchorY + 4 * unit],
+	      pos: [anchorX + 6 * unit, anchorY + 12 * unit],
 	      connections: [],
 	      radius: this.starRadius
 	    }), new Universe.Star({
 	      constellationRef: 0,
-	      pos: [anchorX + 4 * unit, anchorY - 1 * unit],
+	      pos: [anchorX + 12 * unit, anchorY - 3 * unit],
 	      connections: [3],
 	      radius: this.starRadius
 	    }), new Universe.Star({
 	      constellationRef: 0,
-	      pos: [anchorX + 6 * unit, anchorY + 3 * unit],
+	      pos: [anchorX + 18 * unit, anchorY + 9 * unit],
 	      connections: [1, 3],
 	      radius: this.starRadius
 	    }), new Universe.Star({
 	      constellationRef: 0,
-	      pos: [anchorX + 7 * unit, anchorY - 3 * unit],
+	      pos: [anchorX + 21 * unit, anchorY - 9 * unit],
 	      connections: [2],
 	      radius: this.starRadius
 	    }), new Universe.Star({
 	      constellationRef: 0,
-	      pos: [anchorX + 9 * unit, anchorY + 1 * unit],
+	      pos: [anchorX + 27 * unit, anchorY + 3 * unit],
 	      connections: [3, 4],
 	      radius: this.starRadius
 	    })];
@@ -37082,12 +37082,72 @@
 	    var dragonStars = [new Universe.Star({
 	      constellationRef: 1,
 	      pos: [anchorX, anchorY],
-	      connections: [1],
-	      radius: this.starRadius * 2
+	      connections: [1, 2, 3],
+	      radius: this.starRadius
 	    }), new Universe.Star({
 	      constellationRef: 1,
-	      pos: [anchorX + 9 * unit, anchorY + 1 * unit],
+	      pos: [anchorX + 2 * unit, anchorY - 4 * unit],
+	      connections: [4],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 12 * unit, anchorY + 3 * unit],
 	      connections: [],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 10 * unit, anchorY - 1 * unit],
+	      connections: [],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 12 * unit, anchorY - 5 * unit],
+	      connections: [5],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 19 * unit, anchorY - 5.5 * unit],
+	      connections: [6],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 27 * unit, anchorY - 5.8 * unit],
+	      connections: [7],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 19 * unit, anchorY - 3 * unit],
+	      connections: [8],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 26 * unit, anchorY - 1.5 * unit],
+	      connections: [9],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 29 * unit, anchorY + 1.5 * unit],
+	      connections: [10],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 21 * unit, anchorY + 1 * unit],
+	      connections: [],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 13 * unit, anchorY - 3.5 * unit],
+	      connections: [12],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 13 * unit, anchorY - 2 * unit],
+	      connections: [13],
+	      radius: this.starRadius
+	    }), new Universe.Star({
+	      constellationRef: 1,
+	      pos: [anchorX + 15 * unit, anchorY - 3 * unit],
+	      connections: [11],
 	      radius: this.starRadius
 	    })];
 	    var dragonConstellation = new Universe.Constellation(dragonStars, dragonQuote);
