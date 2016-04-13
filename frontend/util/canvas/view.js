@@ -331,11 +331,41 @@ module.exports = function () {
     var kickStars = [new Universe.Star({
       constellationRef: 4,
       pos: [anchorX, anchorY],
-      connections: [1],
+      connections: [1, 6],
       radius: this.starRadius,
     }), new Universe.Star({
       constellationRef: 4,
-      pos: [anchorX - 6 * unit, anchorY + 8 * unit],
+      pos: [anchorX - 4 * unit, anchorY + 5 * unit],
+      connections: [2, 3],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX - 4.5 * unit, anchorY + 9 * unit],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX + 1 * unit, anchorY + 12 * unit],
+      connections: [4, 5, 6],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX + 1 * unit, anchorY + 21 * unit],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX + 8 * unit, anchorY + 6 * unit],
+      connections: [],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX + 3 * unit, anchorY + 6 * unit],
+      connections: [7],
+      radius: this.starRadius,
+    }), new Universe.Star({
+      constellationRef: 4,
+      pos: [anchorX + 6 * unit, anchorY + 3 * unit],
       connections: [],
       radius: this.starRadius,
     }),
