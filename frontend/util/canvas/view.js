@@ -9,7 +9,7 @@ module.exports = function () {
     this.width = width;
     this.height = height;
     this.largeFontSize = (this.width / 20).toString() + 'px';
-    this.smallFontSize = (parseInt(this.largeFontSize) / 2).toString() + 'px';
+    this.smallFontSize = (parseInt(this.largeFontSize) / 3).toString() + 'px';
     this.starRadius = 0.003 * width;
     this.quote = 'Hover your cursor over white dots to find constellations and wisdom';
     canvas.width = width;
@@ -327,7 +327,7 @@ module.exports = function () {
 
     var anchorX = this.width * 80 / 100;
     var anchorY = this.height * 35 / 100;
-    var kickQuote = '"I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times. - Bruce Lee';
+    var kickQuote = '"I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times." - Bruce Lee';
     var kickStars = [new Universe.Star({
       constellationRef: 4,
       pos: [anchorX, anchorY],

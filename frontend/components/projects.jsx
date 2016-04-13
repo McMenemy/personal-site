@@ -24,6 +24,12 @@ var Projects = React.createClass({
     return cloneObj;
   },
 
+  handleLinkClick: function (url) {
+    console.log(url);
+    var tab = window.open(url, '_blank');
+    tab.focus();
+  },
+
   render: function () {
     return (
       <Paper zIndex={0} style={Style.projectDiv} >
@@ -34,18 +40,16 @@ var Projects = React.createClass({
           actAsExpander={true}
           showExpandableButton={true}
         />
-        <a target="_blank" href="http://www.optimyze.xyz/#/?_k=tpo8ju">
-          <CardMedia
-            style={ this.getProjectStyle(Style.projectMedia, './images/optimyze.png') }
-          />
-        </a>
+        <CardMedia
+          style={ this.getProjectStyle(Style.projectMedia, './images/optimyze.png') }
+        />
         <CardText expandable={true}>
           <p>Uses charts and a category system to allow users to find, visualize, and post quicker ways to do repetitive tasks</p>
           <p>Built as a single­page asynchronous app using Ruby on Rails and React with a SQL database</p>
         </CardText>
         <CardActions>
-          <FlatButton label="Live" onTouchTap={this.handleExpand} />
-          <FlatButton label="GitHub" onTouchTap={this.handleReduce} />
+          <FlatButton label="Live" onTouchTap={this.handleLinkClick.bind(null, 'http://www.optimyze.xyz/')} />
+          <FlatButton label="GitHub" onTouchTap={this.handleLinkClick.bind(null, 'https://github.com/McMenemy/optimyze')} />
         </CardActions>
       </Card>
 
@@ -56,18 +60,16 @@ var Projects = React.createClass({
           actAsExpander={true}
           showExpandableButton={true}
         />
-        <a target="_blank" href="https://microorganism-munch.herokuapp.com">
-          <CardMedia
-            style={ this.getProjectStyle(Style.projectMedia, './images/microMunchZoom.png') }
+        <CardMedia
+          style={ this.getProjectStyle(Style.projectMedia, './images/microMunchZoom.png') }
         />
-        </a>
         <CardText expandable={true}>
           <p>A web app game that includes predator and prey AI written in pure JavaScript using basic vector math</p>
           <p>Prey AI allows schooling movement pattern and warning of predators</p>
         </CardText>
         <CardActions>
-          <FlatButton label="Live" onTouchTap={this.handleExpand} />
-          <FlatButton label="GitHub" onTouchTap={this.handleReduce} />
+          <FlatButton label="Live" onTouchTap={this.handleLinkClick.bind(null, 'https://microorganism-munch.herokuapp.com')} />
+          <FlatButton label="GitHub" onTouchTap={this.handleLinkClick.bind(null, 'https://github.com/McMenemy/microorganism-munch')} />
         </CardActions>
       </Card>
 
@@ -78,18 +80,16 @@ var Projects = React.createClass({
           actAsExpander={true}
           showExpandableButton={true}
         />
-        <a target="_blank" href="https://github.com/McMenemy/terminal-chess-game">
-          <CardMedia
-            style={ this.getProjectStyle(Style.projectMedia, './images/chess.png') }
-          />
-        </a>
+        <CardMedia
+          style={ this.getProjectStyle(Style.projectMedia, './images/chess.png') }
+        />
         <CardText expandable={true}>
         <p>Two player terminal chess game written in ruby that enforces game rules</p>
         <p>Utilizes object oriented programing and class inheritance to keep game logic DRY and maintainable</p>
         </CardText>
         <CardActions>
-          <FlatButton label="Live" onTouchTap={this.handleExpand} />
-          <FlatButton label="GitHub" onTouchTap={this.handleReduce} />
+          <FlatButton label="Live" disabled={true} />
+          <FlatButton label="GitHub" onTouchTap={this.handleLinkClick.bind(null, 'https://github.com/McMenemy/terminal-chess-game')} />
         </CardActions>
       </Card>
     </Paper>

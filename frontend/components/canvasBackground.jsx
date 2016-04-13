@@ -2,6 +2,7 @@ var React = require('react');
 var CanvasView = require('../util/canvas/view');
 var Constellation = require('../util/canvas/constellation');
 var Star = require('../util/canvas/star');
+var WebFont = require('webfontloader');
 
 var CanvasBackground = React.createClass({
 
