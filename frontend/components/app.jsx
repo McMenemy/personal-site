@@ -6,6 +6,7 @@ var Style = require('../util/styleObjects');
 
 // components
 var NavBar = require('../components/navBar');
+var Projects = require('../components/projects');
 
 var App = React.createClass({
 
@@ -15,6 +16,9 @@ var App = React.createClass({
         <NavBar />
         <Paper style={Style.splashContainer} zDepth={0}>
           {this.props.children}
+        </Paper>
+        <Paper>
+          <Projects />
         </Paper>
       </div>
     );
